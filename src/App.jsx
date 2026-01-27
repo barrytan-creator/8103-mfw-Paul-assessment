@@ -1,7 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Flashcard from "./components/Flashcard"
 
 function App() {
+
+  // create a state which default value is false
+  // the showMenu variable will store its current value
+  // the setShowMenu functon can update its value
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    if (showMenu == true) {
+      setShowMenu(false)
+    }
+    if (showMenu == false) {
+      setShowMenu(true);
+    }
+  }
+
   return <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
@@ -10,10 +25,12 @@ function App() {
                 type="button" 
                 aria-controls="navbarNav" 
                 aria-expanded="false" 
-                aria-label="Toggle navigation">
+                aria-label="Toggle navigation"
+                onClick={toggleMenu}
+          >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className={`collapse navbar-collapse ${showMenu ? "show" : ""}`} id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <a className="nav-link" href="#">Manage</a>

@@ -21,6 +21,7 @@ export default function ListCards() {
                     <div className="col" key={card.id}>
                         <Flashcard front={card.front}
                             back={card.back}
+                            id={card.id}
                             showBack={showBack}
                         />
                     </div>

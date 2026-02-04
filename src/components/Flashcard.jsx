@@ -1,4 +1,9 @@
+import { useLocation } from "wouter";
+
 function Flashcard(props) {
+
+    const [, navigate] = useLocation();
+
     return <div className="card h-100">
         <div className="card-body">
             <div className="flashcard-front">
@@ -13,8 +18,16 @@ function Flashcard(props) {
             </div>
         </div>
         <div className="card-footer bg-transparent">
-            <button className="btn btn-sm btn-primary me-2">Update</button>
-            <button className="btn btn-sm btn-danger">Delete</button>
+            <button className="btn btn-sm btn-primary me-2"
+                onClick={(e)=>{
+                    navigate("/edit/" + props.id)
+                }}  
+            
+            
+            >Update</button>
+            <button className="btn btn-sm btn-danger" onClick={()=>{
+                navigate('/delete/' + props.id)
+            }}>Delete</button>
         </div>
     </div>
 }

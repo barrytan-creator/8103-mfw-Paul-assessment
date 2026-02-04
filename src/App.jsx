@@ -9,6 +9,7 @@ import ListCards from './pages/ListCards';
 import AddCard from './pages/AddCard';
 import EditCard from './pages/EditCard';
 import LoginPage from './pages/LoginPage';
+import ConfirmDelete from './pages/ConfirmDelete';
 
 function App() {
 
@@ -75,8 +76,9 @@ function App() {
       <Router>
         <Route path="/" component={ListCards} />
         <Route path="/add" component={AddCard} />
-        <Route path="/edit" component={EditCard} />
+        <Route path="/edit/:id" component={EditCard} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/delete/:id" component={ConfirmDelete}/>
       </Router>
 
 

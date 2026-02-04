@@ -1,5 +1,8 @@
-import  {useState } from 'react'
-import { Link, Router, Route} from 'wouter'
+import { useState, useEffect } from 'react'
+import { Link, Router, Route } from 'wouter'
+import axios from "axios";
+import { useAtom } from "jotai";
+import flashcardAtom from "./atom/FlashcardAtom"
 
 // pages
 import ListCards from './pages/ListCards';
@@ -9,16 +12,26 @@ import LoginPage from './pages/LoginPage';
 
 function App() {
 
-  
+  const [flashcards, setFlashcards] = useAtom(flashcardAtom);
 
   // create a state which default value is false
   // the showMenu variable will store its current value
   // the setShowMenu functon can update its value
   const [showMenu, setShowMenu] = useState(false); // creates a state variable when 
-                                                  // the component has mounted and use the default value
+  // the component has mounted and use the default value
 
+  useEffect(() => {
+    // when we refer to any images, or static files, React will look
+    // for it in the public folder
+    const fetchData = async () => {
+      console.log("reading from flashcards.json")
+      const response = await axios.get("./flashcards.json")
+      setFlashcards(response.data);
+    }
+    fetchData();
 
-  
+  }, [])
+
 
   const toggleMenu = () => {
     if (showMenu == true) {
@@ -59,12 +72,12 @@ function App() {
     </nav>
 
     <div className="container mt-4">
-     <Router>
-        <Route path="/" component={ListCards}/>
-        <Route path="/add" component={AddCard}/>
-        <Route path="/edit" component={EditCard}/>
-        <Route path="/login" component={LoginPage}/>
-     </Router>
+      <Router>
+        <Route path="/" component={ListCards} />
+        <Route path="/add" component={AddCard} />
+        <Route path="/edit" component={EditCard} />
+        <Route path="/login" component={LoginPage} />
+      </Router>
 
 
     </div>

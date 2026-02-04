@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import axios from "axios";
+
 import Flashcard from "../components/Flashcard"
 import { useAtom } from "jotai";
 import flashcardAtom from "../atom/FlashcardAtom"
@@ -7,17 +7,6 @@ import flashcardAtom from "../atom/FlashcardAtom"
 export default function ListCards() {
     const [flashcards, setFlashcards] = useAtom(flashcardAtom);
     const [showBack, setShowBack] = useState(false);
-
-    useEffect(() => {
-        // when we refer to any images, or static files, React will look
-        // for it in the public folder
-        const fetchData = async () => {
-            const response = await axios.get("./flashcards.json")
-            setFlashcards(response.data);
-        }
-        fetchData();
-
-    }, [])
 
     return <>
         <div className="d-flex justify-content-between align-items-center mb-4">
